@@ -2,7 +2,7 @@
 CMPS 2200  Recitation 1
 """
 
-### the only imports needed are here
+## the only imports needed are here
 import tabulate
 import time
 ###
@@ -12,7 +12,6 @@ def linear_search(mylist, key):
 	for i,v in enumerate(mylist):
 		if v == key:
 			return i
-	return -1
 
 def test_linear_search():
 	""" done. """
@@ -31,21 +30,41 @@ def _binary_search(mylist, key, left, right):
 	Params:
 	  mylist....list to search
 	  key.......search key
-	  left......left index into list to search
+	 left......left index into list to search
 	  right.....right index into list to search
 
 	Returns:
 	  index of key in mylist, or -1 if not present.
 	"""
 	### TODO
-	pass
+
+	middleIndex = (left + right)//2
+	if left>right:
+		return -1
+
+
+
+
+	if(mylist[middleIndex] == key):
+		return middleIndex
+
+	elif(key<middleIndex):
+		return binary_search(mylist, key, 0, (middleIndex-1))
+	elif(key>middleIndex):
+		return binary_search(mylist, key, middleIndex+1, mylist-1)
+	else:
+		return middleIndex
+
 
 def test_binary_search():
 	assert binary_search([1,2,3,4,5], 5) == 4
 	assert binary_search([1,2,3,4,5], 1) == 0
 	assert binary_search([1,2,3,4,5], 6) == -1
+	assert binary_search([6, 7, 8, 9, 10, 11], 6) == 0
+	assert binary_search([15, 16, 17, 18, 19, 20, 21], 5) == -1
+
 	### TODO: add two more tests here.
-	pass
+
 
 
 def time_search(search_fn, mylist, key):
