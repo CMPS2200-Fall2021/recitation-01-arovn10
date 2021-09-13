@@ -44,7 +44,10 @@ We'll compare the running times of `linear_search` and `binary_search` empirical
 
 **TODO: your answer goes here**
 
-- [ ] 5. Describe the best case input value of `key` for `linear_search`? for `binary_search`? 
+5. Describe the best case input value of `key` for `linear_search`? for `binary_search`? 
+   1. Linear Search: The key element has to be the first element in the list for the best case. This achieves O(1)
+   2. Binary Search: The key element has to be the middle index for the best case input value. This will give us a time complexity of O(1)
+
 
 **TODO: your answer goes here**
 

@@ -3,7 +3,7 @@ CMPS 2200  Recitation 1
 """
 
 ## the only imports needed are here
-#import tabulate
+import tabulate
 import time
 ###
 
@@ -87,7 +87,15 @@ def time_search(search_fn, mylist, key):
 	  search function on this input.
 	"""
 	### TODO
-	pass
+	timenow = time.time()
+	search_fn(mylist, key)
+	timeafter = time.time()-timenow
+
+	finalTime = timeafter * 1000
+
+	return finalTime
+
+
 
 def compare_search(sizes=[1e1, 1e2, 1e3, 1e4, 1e5, 1e6, 1e7]):
 	"""
@@ -105,7 +113,13 @@ def compare_search(sizes=[1e1, 1e2, 1e3, 1e4, 1e5, 1e6, 1e7]):
 	  for each method to run on each value of n
 	"""
 	### TODO
-	pass
+	mylistTotal = []
+
+	for size in sizes:
+		mylist = list(range(int(size)))
+		mylistTotal.append((len(mylist), time_search(linear_search, mylist, -1), time_search(binary_search, mylist, -1)))
+
+	return mylistTotal
 
 def print_results(results):
 	""" done """
@@ -121,3 +135,6 @@ def test_compare_search():
 	assert res[1][0] == 100
 	assert res[0][1] < 1
 	assert res[1][1] < 1
+
+
+print_results(compare_search())
