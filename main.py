@@ -3,7 +3,7 @@ CMPS 2200  Recitation 1
 """
 
 ## the only imports needed are here
-import tabulate
+#import tabulate
 import time
 ###
 
@@ -49,9 +49,9 @@ def _binary_search(mylist, key, left, right):
 		return middleIndex
 
 	elif(key<middleIndex):
-		return binary_search(mylist, key, 0, (middleIndex-1))
+		return _binary_search(mylist, key, 0, (middleIndex-1))
 	elif(key>middleIndex):
-		return binary_search(mylist, key, middleIndex+1, mylist-1)
+		return _binary_search(mylist, key, middleIndex+1, len(mylist)-1)
 	else:
 		return middleIndex
 
@@ -60,8 +60,9 @@ def test_binary_search():
 	assert binary_search([1,2,3,4,5], 5) == 4
 	assert binary_search([1,2,3,4,5], 1) == 0
 	assert binary_search([1,2,3,4,5], 6) == -1
-	assert binary_search([6, 7, 8, 9, 10, 11], 6) == 0
-	assert binary_search([15, 16, 17, 18, 19, 20, 21], 5) == -1
+	assert binary_search([6, 7, 8, 9, 10], 8) == 2
+	assert binary_search([15, 16, 17, 18, 19], 18) == 3
+
 
 	### TODO: add two more tests here.
 
