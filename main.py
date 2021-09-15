@@ -12,6 +12,7 @@ def linear_search(mylist, key):
 	for i,v in enumerate(mylist):
 		if v == key:
 			return i
+	return -1
 
 def test_linear_search():
 	""" done. """
@@ -94,6 +95,9 @@ def time_search(search_fn, mylist, key):
 	finalTime = timeafter * 1000
 
 	return finalTime
+
+
+
 
 
 
