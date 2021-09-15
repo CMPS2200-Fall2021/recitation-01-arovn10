@@ -2,7 +2,7 @@
 CMPS 2200  Recitation 1
 """
 
-### the only imports needed are here
+## the only imports needed are here
 import tabulate
 import time
 ###
@@ -31,21 +31,42 @@ def _binary_search(mylist, key, left, right):
 	Params:
 	  mylist....list to search
 	  key.......search key
-	  left......left index into list to search
+	 left......left index into list to search
 	  right.....right index into list to search
 
 	Returns:
 	  index of key in mylist, or -1 if not present.
 	"""
 	### TODO
-	pass
+
+	middleIndex = (left + right)//2
+	if left>right:
+		return -1
+
+
+
+
+	if(mylist[middleIndex] == key):
+		return middleIndex
+
+	elif(key<middleIndex):
+		return _binary_search(mylist, key, 0, (middleIndex-1))
+	elif(key>middleIndex):
+		return _binary_search(mylist, key, middleIndex+1, len(mylist)-1)
+	else:
+		return middleIndex
+
 
 def test_binary_search():
 	assert binary_search([1,2,3,4,5], 5) == 4
 	assert binary_search([1,2,3,4,5], 1) == 0
 	assert binary_search([1,2,3,4,5], 6) == -1
+	assert binary_search([6, 7, 8, 9, 10], 8) == 2
+	assert binary_search([15, 16, 17, 18, 19], 18) == 3
+
+
 	### TODO: add two more tests here.
-	pass
+
 
 
 def time_search(search_fn, mylist, key):
@@ -67,7 +88,18 @@ def time_search(search_fn, mylist, key):
 	  search function on this input.
 	"""
 	### TODO
-	pass
+	timenow = time.time()
+	search_fn(mylist, key)
+	timeafter = time.time()-timenow
+
+	finalTime = timeafter * 1000
+
+	return finalTime
+
+
+
+
+
 
 def compare_search(sizes=[1e1, 1e2, 1e3, 1e4, 1e5, 1e6, 1e7]):
 	"""
@@ -85,7 +117,13 @@ def compare_search(sizes=[1e1, 1e2, 1e3, 1e4, 1e5, 1e6, 1e7]):
 	  for each method to run on each value of n
 	"""
 	### TODO
-	pass
+	mylistTotal = []
+
+	for size in sizes:
+		mylist = list(range(int(size)))
+		mylistTotal.append((len(mylist), time_search(linear_search, mylist, -1), time_search(binary_search, mylist, -1)))
+
+	return mylistTotal
 
 def print_results(results):
 	""" done """
@@ -101,3 +139,5 @@ def test_compare_search():
 	assert res[1][0] == 100
 	assert res[0][1] < 1
 	assert res[1][1] < 1
+
+print_results(compare_search())
